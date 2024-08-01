@@ -1,0 +1,37 @@
+name: Checkout
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - "master"
+      - "develop"
+      - "feature/**"
+      - "bugfix/**"
+      - "hotfix/**"
+      - "support/**"
+    paths:
+      - "src/**"
+      - "package.json"
+  pull_request:
+    branches:
+      - "master"
+      - "develop"
+      - "feature/**"
+      - "bugfix/**"
+      - "hotfix/**"
+      - "support/**"
+    paths:
+      - "src/**"
+      - "package.json"
+
+jobs:
+  checkout:
+    name: "Checkout"
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./
+    steps:
+      - name: 🚂 Get latest code
+        uses: actions/checkout@v3
