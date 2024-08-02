@@ -1,0 +1,32 @@
+{
+  "search.exclude": {
+    "coverage": true,
+    "build": true
+  },
+  "files.watcherExclude": {
+    "coverage": true,
+    "build": true
+  },
+  "debug.openDebug": "openOnDebugBreak",
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.expand": false,
+  "explorer.fileNesting.patterns": {
+    "package.json": "package-lock.json, .babelrc, .prettierrc, .stylelintrc, .editorconfig, eslint.config.cjs, commitMessageConfig.js",
+    ".gitignore": ".gitattributes, .gitmodules, .gitmessage, .mailmap, .git-blame*",
+    "readme*": "authors, backers.md, changelog*, citation*, code_of_conduct.md, codeowners, contributing.md, contributors, copying, credits, governance.md, history.md, license*, maintainers, readme*, security.md, sponsors.md",
+  },
+  "files.associations": {},
+  "highlight.regexes": {
+    "(\"@\\s*.+\":\\s{0,1}{},)": {
+      "filterFileRegex": ".*\\.arb",
+      "decorations": [
+        {
+          "overviewRulerColor": "#d19a66",
+          "backgroundColor": "#d19a66",
+          "color": "#282c34",
+          "fontWeight": "bold"
+        }
+      ]
+    }
+  }
+}

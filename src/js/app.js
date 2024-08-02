@@ -1,43 +1,25 @@
+import hendlebardsData from '../assets/data/data.js';
+
 window.onload = function () {
-  const gid = "0";
-  const id = "1NErI3-FRfHuWj3YGKqImU4OiSt-x0uGd7tShxRXIeCo";
-  const url = "https://docs.google.com/spreadsheets/d/" + id + "/gviz/tq?tqx=out:json&tq&gid=" + gid;
-
-  // let getJSON = function (url, callback) {
-  //   let xhr = new XMLHttpRequest();
-  //   xhr.open('GET', url, true);
-  //   xhr.responseType = 'json';
-  //   xhr.onload = function() {
-  //     let status = xhr.status;
-  //     if (status === 200) {
-  //       callback(null, xhr.response)
-  //     } else {
-  //       callback(status, xhr.response)
-  //     }
-  //   };
-  //   xhr.send();
-  // }
-
-  // getJSON(url, function(err, data) {
-  //     if (err !== null) {
-  //       console.log('Error: ' + err);
-  //     } else {
-  //       console.log('Data: ' + data);
-  //       data = data['feed']['entry'];
-  //       console.log(data);
-  //       document.querySelector('.shop-field').innerHTML = _showGoods(data);
-  //     }
-  // });
+  const gid = '0';
+  const id = '1NErI3-FRfHuWj3YGKqImU4OiSt-x0uGd7tShxRXIeCo';
+  const url =
+    'https://docs.google.com/spreadsheets/d/' +
+    id +
+    '/gviz/tq?tqx=out:json&tq&gid=' +
+    gid;
 
   fetch(url)
     .then((r) => r.text())
     .then((d) => _parseData(d))
-    .then((d) => (document.getElementById("shop-field").innerHTML = _showGoods(d)));
+    .then((d) => (document.getElementById('shop-field').innerHTML = _showGoods(d)));
+
+  _handlebarsInit();
 
   function _showGoods(data) {
-    const rows = data["rows"];
+    const rows = data['rows'];
 
-    let out = "";
+    let out = '';
     for (var i = 0; i < rows.length; i++) {
       if (rows[i][6] != 0) {
         out += `<div class="col-lg-3 col-sm-2 text-center">
@@ -69,7 +51,7 @@ window.onload = function () {
       const header = table.cols.map(({ label }) => label);
 
       // Modified from const rows = table.rows.map(({c}) => c.map(({v}) => v));
-      const rows = table.rows.map(({ c }) => c.map((e) => (e ? e.v || "" : "")));
+      const rows = table.rows.map(({ c }) => c.map((e) => (e ? e.v || '' : '')));
 
       console.log(header);
       console.log(rows);
@@ -79,5 +61,23 @@ window.onload = function () {
         rows: rows,
       };
     }
+  }
+
+  function _handlebarsInit() {
+    // Регистрация хелпера для вычисления возраста
+    Handlebars.registerHelper('calculateAge', function (birthYear) {
+      const currentYear = new Date().getFullYear();
+      return currentYear - birthYear;
+    });
+
+    // Получаем HTML из шаблона
+    const source = document.getElementById('shop-item').innerHTML;
+    const template = Handlebars.compile(source);
+
+    // Генерируем HTML с данными
+    const html = template(hendlebardsData);
+
+    // Вставляем сгенерированный HTML в контейнер
+    document.getElementById('content').innerHTML = html;
   }
 };
