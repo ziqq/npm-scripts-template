@@ -12,7 +12,7 @@
 			href="dist/css/app.css">
 	</head>
 	<body>
-
+		<!-- Google Shop example -->
 		<div class="wrapper mt-5">
 			<div class="container">
 				<div class="row">
@@ -22,66 +22,39 @@
 				</div>
 				<div id="shop-field" class="row"></div>
 			</div>
+
+			<!-- Handlebars example -->
+			<div id="handlebars-content"></div>
 		</div>
 
-		<script id="shop-item" type="text/x-handlebars-template">
-			{{#each pets}}
-			<div class="pet">
-				<div class="photo-column">
-					<img src="{{photo}}" alt="">
-				</div>
-				<div class="info-column">
-					<h2>{{name}} <span class="species">{{species}}</span></h2>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.0/handlebars.js"></script>
+		<!-- Handlebars example -->
+		<script id="pet-item" type="text/x-handlebars-template">
+			<div class="container">
+				<div class="row pet-item">
+					{{#each pets}}
+					<div class="pet col-xl-3 col-lg-4 col-sm-6 pet-item__inner">
+						<div class="pet-item_photo">
+							<img src="{{photo}}" alt="pet photo">
+						</div>
+						<div class="pet-item_info">
+							<h5 class="pt-10 pet-item__title">{{name}} <span class="species pet-item__title-inner">{{species}}</span></h5>
 
-					<p>Age: {{calculateAge birthYear}}</p>
+							<p class="pet-item__age">Age: {{calculateAge birthYear}}</p>
 
-					{{#if favFoods}}
-					<h4 class="headline-bar">Favorite Foods</h4>
-					<ul class="favorite-foods">
-						{{#each favFoods}}
-						<li>{{{this}}}</li>
-						{{/each}}
-					</ul>
-					{{/if}}
+							{{#if favFoods}}
+							<h4 class="pet-item__favorite">Favorite foods</h4>
+							<ul class="pet-item__favorite--list">
+								{{#each favFoods}}
+								<li>{{{this}}}</li>
+								{{/each}}
+							</ul>
+							{{/if}}
+						</div>
+					</div>
+					{{/each}}
 				</div>
 			</div>
-			{{/each}}
-		</script>
-		<div id="content"></div>
-
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.0/handlebars.js"></script>
-		<script>
-			// Регистрация хелпера для вычисления возраста
-			Handlebars.registerHelper('calculateAge', function(birthYear) {
-				const currentYear = new Date().getFullYear();
-				return currentYear - birthYear;
-			});
-			// Данные для шаблона
-			const context = {
-				pets: [
-					{
-						name: 'Buddy',
-						species: 'Dog',
-						birthYear: 2015,
-						photo: 'https://example.com/dog.jpg',
-						favFoods: ['Bone', 'Chicken', 'Beef']
-					},
-					{
-						name: 'Whiskers',
-						species: 'Cat',
-						birthYear: 2018,
-						photo: 'https://example.com/cat.jpg',
-						favFoods: ['Fish', 'Milk']
-					}
-				]
-			};
-			// Получаем HTML из шаблона
-			const source = document.getElementById('shop-item').innerHTML;
-			const template = Handlebars.compile(source);
-			// Генерируем HTML с данными
-			const html = template(context);
-			// Вставляем сгенерированный HTML в контейнер
-			document.getElementById('content').innerHTML = html;
 		</script>
 
 		<script type="module" src="dist/js/app.min.js"></script>

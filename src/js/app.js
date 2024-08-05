@@ -1,5 +1,3 @@
-import hendlebardsData from '../assets/data/data.js';
-
 window.onload = function () {
   const gid = '0';
   const id = '1NErI3-FRfHuWj3YGKqImU4OiSt-x0uGd7tShxRXIeCo';
@@ -18,23 +16,18 @@ window.onload = function () {
 
   function _showGoods(data) {
     const rows = data['rows'];
-
     let out = '';
     for (var i = 0; i < rows.length; i++) {
       if (rows[i][6] != 0) {
-        out += `<div class="col-lg-3 col-sm-2 text-center">
+        out += `<div class="col-xl-3 col-lg-4 col-sm-6 text-center">
                   <div class="item-product">
                     <h5 class="item-product__title">${rows[i][1]}</h5>
                     <div class="item-product__img">
-                      <img src="${rows[i][2]}" alt="">
+                      <img src="${rows[i][2]}" alt="Product photo">
                     </div>
                     <div class="item-product__desc">
-                      <span class="item-product__cost">
-                        Цена: ${rows[i][3]} руб.
-                      </span>
-                      <span class="item-product__wight">
-                        На складе: ${rows[i][5]} кг
-                      </span>
+                      <span class="item-product__cost">Цена: ${rows[i][3]} руб.</span>
+                      <span class="item-product__wight">На складе: ${rows[i][5]} кг.</span>
                     </div>
                   </div>
                 </div>`;
@@ -71,13 +64,34 @@ window.onload = function () {
     });
 
     // Получаем HTML из шаблона
-    const source = document.getElementById('shop-item').innerHTML;
+    const source = document.getElementById('pet-item').innerHTML;
     const template = Handlebars.compile(source);
 
     // Генерируем HTML с данными
-    const html = template(hendlebardsData);
+    const html = template(handlebardsData);
 
     // Вставляем сгенерированный HTML в контейнер
-    document.getElementById('content').innerHTML = html;
+    document.getElementById('handlebars-content').innerHTML = html;
   }
+};
+
+const handlebardsData = {
+  pets: [
+    {
+      name: 'Buddy',
+      species: 'Dog',
+      birthYear: 2015,
+      photo:
+        'https://iso.500px.com/wp-content/uploads/2021/10/The-incredibly-cute-Noods-By-Elke-Vogelsang-2-1500x1000.jpeg',
+      favFoods: ['Bone', 'Chicken', 'Beef'],
+    },
+    {
+      name: 'Whiskers',
+      species: 'Cat',
+      birthYear: 2018,
+      photo:
+        'https://iso.500px.com/wp-content/uploads/2021/10/The-incredibly-cute-Noods-By-Elke-Vogelsang-2-1500x1000.jpeg',
+      favFoods: ['Fish', 'Milk'],
+    },
+  ],
 };
