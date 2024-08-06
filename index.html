@@ -1,55 +1,62 @@
 <!DOCTYPE html>
-<html dir="ltr" lang="en" class="no-js">
-<head>
-	<title>Google Shop</title>
+<html dir="ltr" lang="ru" class="no-js">
+	<head>
+		<title>Google Shop</title>
+		<link
+			rel="stylesheet"
+			crossorigin="anonymous"
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+			integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T">
+		<link
+			rel="stylesheet"
+			href="dist/css/app.css">
+	</head>
+	<body>
+		<!-- Google Shop example -->
+		<div class="wrapper mt-5">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<h1 class="text-center mb-5">Goggle Shop</h1>
+					</div>
+				</div>
+				<div id="shop-field" class="row"></div>
+			</div>
 
-	<link
-		rel="stylesheet"
-		crossorigin="anonymous"
-		href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T">
-	<link
-		rel="stylesheet"
-		href="dist/css/app.css">
-</head>
-<body>
+			<!-- Handlebars example -->
+			<div id="handlebars-content"></div>
+		</div>
 
-	<div class="wrapper mt-5">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<h1 class="text-center mb-5">Goggle Shop</h1>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.0/handlebars.js"></script>
+		<!-- Handlebars example -->
+		<script id="pet-item" type="text/x-handlebars-template">
+			<div class="container">
+				<div class="row pet-item">
+					{{#each pets}}
+					<div class="pet col-xl-3 col-lg-4 col-sm-6 pet-item__inner">
+						<div class="pet-item_photo">
+							<img src="{{photo}}" alt="pet photo">
+						</div>
+						<div class="pet-item_info">
+							<h5 class="pt-10 pet-item__title">{{name}} <span class="species pet-item__title-inner">{{species}}</span></h5>
+
+							<p class="pet-item__age">Age: {{calculateAge birthYear}}</p>
+
+							{{#if favFoods}}
+							<h4 class="pet-item__favorite">Favorite foods</h4>
+							<ul class="pet-item__favorite--list">
+								{{#each favFoods}}
+								<li>{{{this}}}</li>
+								{{/each}}
+							</ul>
+							{{/if}}
+						</div>
+					</div>
+					{{/each}}
 				</div>
 			</div>
-			<div id="shop-field" class="row"></div>
-		</div>
-	</div>
+		</script>
 
-	<script id="shop-item" type="text/x-handlebars-template">
-		{{#each pets}}
-		<div class="pet">
-			<div class="photo-column">
-				<img src="{{photo}}" alt="">
-			</div>
-			<div class="info-column">
-				<h2>{{name}} <span class="species">{{species}}</span></h2>
-
-				<p>Age: {{calculateAge birthYear}}</p>
-
-				{{#if favFoods}}
-				<h4 class="headline-bar">Favorite Foods</h4>
-				<ul class="favorite-foods">
-					{{#each favFoods}}
-					<li>{{{this}}}</li>
-					{{/each}}
-				</ul>
-				{{/if}}
-			</div>
-		</div>
-		{{/each}}
-	</script>
-
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.0/handlebars.js"></script>
-	<script src="dist/js/app.min.js"></script>
-</body>
+		<script type="module" src="dist/js/app.min.js"></script>
+	</body>
 </html>
