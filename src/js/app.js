@@ -1,62 +1,88 @@
-window.onload = function () {
-  const gid = '0';
-  const id = '1NErI3-FRfHuWj3YGKqImU4OiSt-x0uGd7tShxRXIeCo';
-  const url =
-    'https://docs.google.com/spreadsheets/d/' +
-    id +
-    '/gviz/tq?tqx=out:json&tq&gid=' +
-    gid;
+'use strict';
 
+window.onload = function () {
+  const url =
+    'https://docs.google.com/spreadsheets/d/1NErI3-FRfHuWj3YGKqImU4OiSt-x0uGd7tShxRXIeCo/gviz/tq?tqx=out:json&tq&gid=0';
+
+  const catalog = document.getElementById('catalog');
   fetch(url)
     .then((r) => r.text())
     .then((d) => _parseData(d))
-    .then((d) => (document.getElementById('shop-field').innerHTML = _showGoods(d)));
+    .then((d) => (catalog.innerHTML = _renderData(d)));
 
-  _handlebarsInit();
+  _initializeHandlebars();
 
-  function _showGoods(data) {
-    const rows = data['rows'];
+  function _renderData(data) {
+    const values = data.values;
     let out = '';
-    for (var i = 0; i < rows.length; i++) {
-      if (rows[i][6] != 0) {
-        out += `<div class="col-xl-3 col-lg-4 col-sm-6 text-center">
-                  <div class="item-product">
-                    <h5 class="item-product__title">${rows[i][1]}</h5>
-                    <div class="item-product__img">
-                      <img src="${rows[i][2]}" alt="Product photo">
-                    </div>
-                    <div class="item-product__desc">
-                      <span class="item-product__cost">Цена: ${rows[i][3]} руб.</span>
-                      <span class="item-product__wight">На складе: ${rows[i][5]} кг.</span>
-                    </div>
-                  </div>
-                </div>`;
+    for (var i = 0; i < values.length; i++) {
+      let product = values[i];
+      let title = product[0];
+      let img = product[1];
+      let description = product[2];
+      let price = product[3];
+      let remainder = product[4];
+      let sale = product[5];
+      let show = product[6] != 0;
+      if (show) {
+        // TODO(ziqq): Price can by: ₽ | $
+        // TODO(ziqq): Convert remainder grams to human format
+        // Anton Ustinoff <a.a.ustinoff@gmail.com>, 06 January 2026
+        let saleHTML = ``;
+        const salePercent = Number(sale);
+        const priceValue = Number(price);
+
+        if (salePercent > 0 && !isNaN(priceValue) && !isNaN(salePercent)) {
+          const discountedPrice = priceValue / salePercent;
+          const calculatedDiscount = Math.ceil(discountedPrice);
+          const savingsAmount = Math.abs(priceValue - calculatedDiscount);
+          saleHTML = `<span class="price price--sale">${savingsAmount}</span>`;
+        }
+        out += `<div class="product-item">
+              <div class="product-item__img" itemscope itemtype="https://schema.org/ImageObject">
+                <img src="${img}" alt="${title}">
+                <meta itemprop="name" content="${description}">
+              </div>
+              <div
+                class="product-item__price"
+                itemprop="offers"
+                itemscope itemtype="http://schema.org/Offer"
+              >
+                ${saleHTML}
+                <span class="price">${price}</span>
+                <meta itemprop="priceCurrency" content="RUB" />
+                <meta itemprop="price" content="${price}">
+              </div>
+              <span class="product-item__category">Тайваньский улун</span>
+              <h6 class="product-item__title" itemprop="headline">${title}</h6>
+              <button class="product-item__btn c-btn c-btn--primary c-btn--small">В корзину</button>
+            </div>`;
       }
     }
     return out;
   }
 
   function _parseData(data) {
-    const r = data.match(/google\.visualization\.Query\.setResponse\(([\s\S\w]+)\)/);
+    const r = data.match(
+      /google\.visualization\.Query\.setResponse\(([\s\S\w]+)\)/,
+    );
     if (r && r.length == 2) {
       const obj = JSON.parse(r[1]);
       const table = obj.table;
-      const header = table.cols.map(({ label }) => label);
+      const keys = table.cols.map(({ label }) => label);
 
       // Modified from const rows = table.rows.map(({c}) => c.map(({v}) => v));
-      const rows = table.rows.map(({ c }) => c.map((e) => (e ? e.v || '' : '')));
-
-      console.log(header);
-      console.log(rows);
-
-      return {
-        header: header,
-        rows: rows,
-      };
+      const values = table.rows.map(({ c }) =>
+        c.map((e) => (e ? e.v || '' : '')),
+      );
+      const data = { keys: keys, values: values };
+      console.info(data);
+      return data;
     }
   }
 
-  function _handlebarsInit() {
+  /* Initialize Handlebars */
+  function _initializeHandlebars() {
     // Регистрация хелпера для вычисления возраста
     Handlebars.registerHelper('calculateAge', function (birthYear) {
       const currentYear = new Date().getFullYear();
@@ -75,6 +101,7 @@ window.onload = function () {
   }
 };
 
+/* Fake data for handlebars */
 const handlebardsData = {
   pets: [
     {

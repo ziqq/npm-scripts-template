@@ -1,5 +1,6 @@
 /* Typography */
 @use './typography';
+@use './mixins';
 
 /* Material Icons */
 @import 'https://fonts.googleapis.com/icon?family=Material+Icons';
@@ -111,7 +112,7 @@ button {
   padding: calc(var(--padding) / 2) var(--padding);
 
   h1 {
-    font-size: 18px;
+    font-size: 30px;
     line-height: 1.5;
     font-family: DrukCyr, Arial, sans-serif;
     font-weight: 500;
