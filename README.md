@@ -1,8 +1,6 @@
 # npm-scripts-template
 
-> 🚀 Modern frontend build template using npm scripts
-
-A lightweight alternative to webpack/vite for small projects. Uses only npm scripts to build CSS, JavaScript, optimize images and SVG icons.
+Modern frontend build template using npm scripts. A lightweight alternative to webpack/vite for small projects. Uses only npm scripts to build CSS, JavaScript, optimize images and SVG icons.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Node.js Version](https://img.shields.io/badge/node-%3E%3D16.0.0-brightgreen)](https://nodejs.org/)
