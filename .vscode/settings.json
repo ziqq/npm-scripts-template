@@ -5,7 +5,7 @@
   "explorer.fileNesting.expand": false,
   "explorer.fileNesting.patterns": {
     ".env": ".env.*",
-    "package.json": "package-lock.json",
+    "package.json": "package-lock.json, yarn.lock, pnpm-lock.yaml",
     ".editorconfig": ".babelrc, .prettierrc, .stylelintrc, eslint.config.js, eslint.config.cjs, stylelint.config.js",
     ".gitignore": ".gitattributes, .gitmodules, .gitmessage, .mailmap, .git-blame*",
     "readme*": "authors, backers.md, changelog*, citation*, code_of_conduct.md, codeowners, contributing.md, contributors, copying, credits, governance.md, history.md, license*, maintainers, readme*, security.md, sponsors.md",
