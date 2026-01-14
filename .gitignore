@@ -1,4 +1,8 @@
-dist
+.sass-cache
+.DS_Store
+.env
 node_modules
 npm-debug.log
-.sass-cache
+dist
+build
+coverage
