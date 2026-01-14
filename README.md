@@ -1,108 +1,251 @@
-# npm-scripts-boilerplate
+# npm-scripts-template
 
-A collection of packages that build a website using `npm scripts`.
+> 🚀 Modern frontend build template using npm scripts
 
-* [List of packages used](#list-of-packages-used)
-* [Using in your project](#using-in-your-project)
-* [List of available tasks](#list-of-available-tasks)
+A lightweight alternative to webpack/vite for small projects. Uses only npm scripts to build CSS, JavaScript, optimize images and SVG icons.
 
-## List of packages used
-[autoprefixer](https://github.com/postcss/autoprefixer), [browser-sync](https://github.com/Browsersync/browser-sync), [eslint](https://github.com/eslint/eslint), [imagemin-cli](https://github.com/imagemin/imagemin-cli), [node-sass](https://github.com/sass/node-sass), [onchange](https://github.com/Qard/onchange), [npm-run-all](https://github.com/mysticatea/npm-run-all), [postcss-cli](https://github.com/code42day/postcss-cli), [svgo](https://github.com/svg/svgo), [svg-sprite-generator](https://github.com/frexy/svg-sprite-generator), [uglify-js](https://github.com/mishoo/UglifyJS2).
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Node.js Version](https://img.shields.io/badge/node-%3E%3D16.0.0-brightgreen)](https://nodejs.org/)
 
-Many, many thanks go out to Keith Cirkel for [his post](http://blog.keithcirkel.co.uk/how-to-use-npm-as-a-build-tool/) and his useful CLI tools!
+---
 
-## Using in your project
-* First, ensure that node.js & npm are both installed. If not, choose your OS and installation method from [this page](https://nodejs.org/en/download/package-manager/) and follow the instructions.
-* Next, use your command line to enter your project directory.
-  * If this a new project (without a `package.json` file), start by running `npm init`. This will ask a few questions and use your responses to build a basic `package.json` file. Next, copy the `"devDependencies"` object into your `package.json`.
-  * If this is an existing project, copy the contents of `"devDependencies"` into your `package.json`.
-* Now, copy any tasks you want from the `"scripts"` object into your `package.json` `"scripts"` object.
-* Finally, run `npm install` to install all of the dependencies into your project.
+## 📋 Table of Contents
 
-You're ready to go! Run any task by typing `npm run task` (where "task" is the name of the task in the `"scripts"` object). The most useful task for rapid development is `watch`. It will start a new server, open up a browser and watch for any SCSS or JS changes in the `src` directory; once it compiles those changes, the browser will automatically inject the changed file(s)!
+- [Features](#-features)
+- [Quick Start](#-quick-start)
+- [Project Structure](#-project-structure)
+- [Available Commands](#-available-commands)
+- [Used Packages](#-used-packages)
+- [Development](#-development)
 
-## List of available tasks
-### `clean`
-  `rm -f dist/{css/*,js/*,images/*}`
+---
 
-  Delete existing dist files
+## ✨ Features
 
-### `autoprefixer`
-  `postcss -u autoprefixer -r dist/css/*`
+- 🎨 **SCSS → CSS** - compilation with autoprefixer
+- 📦 **ES6+ → ES5** - transpilation via Babel
+- 🗜️ **Minification** - CSS and JavaScript
+- 🖼️ **Image Optimization** - automatic compression
+- 🎯 **SVG Sprites** - icon consolidation
+- 🔄 **Live Reload** - automatic browser refresh
+- 🔍 **Linting** - ESLint for JS, Stylelint for SCSS
+- 🎭 **Fonts** - automatic copying to dist
+- 🔥 **Firebase** - ready-to-use deployment commands
 
-  Add vendor prefixes to your CSS automatically
+---
 
-### `scss`
-  `node-sass --output-style compressed -o dist/css src/scss`
+## 🚀 Quick Start
 
-  Compile Scss to CSS
+### Installation
 
-### `lint`
-  `eslint src/js`
+```bash
+# Clone repository
+git clone https://github.com/ziqq/npm-scripts-template.git
+cd npm-scripts-template
 
-  "Lint" your JavaScript to enforce a uniform style and find errors
+# Install dependencies
+npm install
 
-### `uglify`
-  `mkdir -p dist/js && uglifyjs src/js/*.js -m -o dist/js/app.js && uglifyjs src/js/*.js -m -c -o dist/js/app.min.js`
+# Start project
+npm start
+```
 
-  Uglify (minify) a production ready bundle of JavaScript
+After starting:
 
-### `imagemin`
-  `imagemin src/images/* -o dist/images`
+- Browser will open with your project
+- Live server will start on `http://localhost:3000`
+- Files will be automatically rebuilt on changes
 
-  Compress all types of images
+---
 
-### `icons`
-  `svgo -f src/images/icons && mkdir -p dist/images && svg-sprite-generate -d src/images/icons -o dist/images/icons.svg`
+## 📁 Project Structure
 
-  Compress separate SVG files and combine them into one SVG "sprite"
+```
+npm-scripts-template/
+├── src/                      # Source files
+│   ├── js/                   # JavaScript files
+│   │   └── app.js           # Main JS file
+│   ├── scss/                 # SCSS styles
+│   │   ├── app.scss         # Main stylesheet
+│   │   ├── _variables.scss  # Variables
+│   │   ├── _typography.scss # Typography and fonts
+│   │   └── _mixins.scss     # Mixins
+│   └── assets/              # Static resources
+│       ├── fonts/           # Fonts
+│       ├── images/          # Images
+│       └── icons/           # SVG icons
+├── dist/                     # Built files (generated)
+│   ├── css/                 # Compiled CSS
+│   ├── js/                  # Transpiled JS
+│   └── assets/              # Optimized assets
+├── index.html               # Main page
+└── package.json             # Project configuration
+```
 
-### `serve`
-  `browser-sync start --server --files 'dist/css/*.css, dist/js/*.js, **/*.html, !node_modules/**/*.html'`
+---
 
-  Start a new server and watch for CSS & JS file changes in the `dist` folder
+## 🛠️ Available Commands
 
-### `build:css`
-  `run-s scss autoprefixer`
+### Main Commands
 
-  Alias to run the `scss` and `autoprefixer` tasks. Compiles Scss to CSS & add vendor prefixes
+| Command         | Description                                                     |
+| --------------- | --------------------------------------------------------------- |
+| `npm start`     | Clean dist, build project and start dev server with live reload |
+| `npm run build` | Full production build                                           |
+| `npm run clean` | Remove dist folder                                              |
+| `npm run serve` | Start local server with live reload                             |
 
-### `build:js`
-  `run-s lint concat uglify`
+### Partial Builds
 
-  Alias to run the `lint`, `concat` and `uglify` tasks. Lints JS, combines `src` JS files & uglifies the output
+| Command                | Description                               |
+| ---------------------- | ----------------------------------------- |
+| `npm run build:css`    | Lint, compile SCSS → CSS + autoprefixer   |
+| `npm run build:js`     | Lint, transpile ES6+ → ES5 + minification |
+| `npm run build:images` | Compress images + generate SVG sprite     |
 
-### `build:images`
-  `run-s imagemin icons`
+### Individual Tasks
 
-  Alias to run the `imagemin` and `icons` tasks. Compresses images, generates an SVG sprite from a folder of separate SVGs
+#### CSS
 
-### `build`
-  `run-s build:*`
+```bash
+npm run lint-scss    # Check SCSS files
+npm run scss         # Compile SCSS → CSS
+npm run autoprefixer # Add vendor prefixes
+```
 
-  Alias to run all of the `build` commands
+#### JavaScript
 
-### `watch:css`
-  `onchange 'src/**/*.scss' -- run-s build:css`
+```bash
+npm run lint    # ESLint check
+npm run babel   # Transpile ES6+ → ES5
+npm run uglify  # Minify JS
+```
 
-  Watches for any .scss file in `src` to change, then runs the `build:css` task
+#### Assets
+
+```bash
+npm run fonts    # Copy fonts to dist
+npm run imagemin # Optimize images
+npm run icons    # Create SVG sprite
+```
+
+#### Watch Mode
+
+```bash
+npm run watch          # Run all watch tasks + server
+npm run watch:css      # Watch SCSS changes
+npm run watch:js       # Watch JS changes
+npm run watch:fonts    # Watch font changes
+npm run watch:icons    # Watch SVG changes
+npm run watch:images   # Watch image changes
+```
+
+#### Firebase (optional)
+
+```bash
+npm run firebase:login # Firebase authentication
+npm run firebase:init  # Initialize Firebase project
+npm run firebase:serve # Local Firebase functions
+```
+
+---
+
+## 📦 Used Packages
+
+### Build and Compilation
+
+- **[sass](https://github.com/sass/dart-sass)** - SCSS → CSS compiler
+- **[autoprefixer](https://github.com/postcss/autoprefixer)** - automatic vendor prefixes
+- **[babel](https://babeljs.io/)** - modern JavaScript transpilation
+- **[uglify-js](https://github.com/mishoo/UglifyJS2)** - JavaScript minification
+
+### Optimization
+
+- **[imagemin-cli](https://github.com/imagemin/imagemin-cli)** - image compression
+- **[svgo](https://github.com/svg/svgo)** - SVG optimization
+- **[svg-sprite-generator](https://github.com/frexy/svg-sprite-generator)** - SVG sprite creation
+
+### Linting
+
+- **[eslint](https://eslint.org/)** - JavaScript linter
+- **[stylelint](https://stylelint.io/)** - CSS/SCSS linter
+- **[prettier](https://prettier.io/)** - code formatter
+
+### Development Tools
+
+- **[browser-sync](https://browsersync.io/)** - live reload server
+- **[npm-run-all](https://github.com/mysticatea/npm-run-all)** - parallel task execution
+- **[onchange](https://github.com/Qard/onchange)** - file change watcher
+
+---
+
+## 💻 Development
+
+### Adding to Existing Project
+
+1. Copy `"devDependencies"` from `package.json` to your project
+2. Copy needed commands from `"scripts"` section
+3. Run `npm install`
+4. Adapt folder structure to your project
+
+### Configuration
+
+All configuration files are located in the project root:
+
+- `.prettierrc` - Prettier settings
+- `eslint.config.cjs` - ESLint settings
+- `stylelint.config.js` - Stylelint settings
+- `.babelrc` - Babel settings
+
+### Requirements
+
+- Node.js >= 16.0.0
+- npm >= 7.0.0
+
+---
+
+## 📝 License
+
+MIT © [Anton Ustinoff](https://github.com/ziqq)
+
+---
+
+## 🙏 Acknowledgments
+
+Many thanks to [Keith Cirkel](https://github.com/keithamus) for the [article](http://blog.keithcirkel.co.uk/how-to-use-npm-as-a-build-tool/) about using npm as a build tool.
+
+---
+
+## 📞 Contacts
+
+Author: Anton Ustinoff
+Email: a.a.ustinoff@gmail.com
+GitHub: [@ziqq](https://github.com/ziqq)
+
+`onchange 'src/**/*.scss' -- run-s build:css`
+
+Watches for any .scss file in `src` to change, then runs the `build:css` task
 
 ### `watch:js`
-  `onchange 'src/**/*.js' -- run-s build:js`
 
-  Watches for any .js file in `src` to change, then runs the `build:js` task
+`onchange 'src/**/*.js' -- run-s build:js`
+
+Watches for any .js file in `src` to change, then runs the `build:js` task
 
 ### `watch:images`
-  `onchange 'src/images/**/*' -- run-s build:images`
 
-  Watches for any images in `src` to change, then runs the `build:images` task
+`onchange 'src/images/**/*' -- run-s build:images`
+
+Watches for any images in `src` to change, then runs the `build:images` task
 
 ### `watch`
-  `run-p serve watch:*`
 
-  Run the following tasks simultaneously: `serve`, `watch:css`, `watch:js` & `watch:images`. When a .scss or .js file changes in `src` or an image changes in `src/images`, the task will compile the changes to `dist`, and the server will be notified of the change. Any browser connected to the server will then inject the new file from `dist`
+`run-p serve watch:*`
+
+Run the following tasks simultaneously: `serve`, `watch:css`, `watch:js` & `watch:images`. When a .scss or .js file changes in `src` or an image changes in `src/images`, the task will compile the changes to `dist`, and the server will be notified of the change. Any browser connected to the server will then inject the new file from `dist`
 
 ### `postinstall`
-  `run-s build watch`
 
-  Runs `watch` after `npm install` is finished
+`run-s build watch`
+
+Runs `watch` after `npm install` is finished
