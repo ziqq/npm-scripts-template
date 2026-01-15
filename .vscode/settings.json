@@ -1,21 +1,30 @@
 {
-  "search.exclude": {
-    "coverage": true,
-    "build": true
-  },
-  "files.watcherExclude": {
-    "coverage": true,
-    "build": true
-  },
   "debug.openDebug": "openOnDebugBreak",
+  "editor.formatOnSave": true,
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.expand": false,
   "explorer.fileNesting.patterns": {
-    "package.json": "package-lock.json, .babelrc, .prettierrc, .stylelintrc, .editorconfig, eslint.config.cjs, commitMessageConfig.js",
+    ".env": ".env.*",
+    "package.json": "package-lock.json, yarn.lock, pnpm-lock.yaml",
+    ".editorconfig": ".babelrc, .prettierrc, .stylelintrc, eslint.config.js, eslint.config.cjs, stylelint.config.js",
     ".gitignore": ".gitattributes, .gitmodules, .gitmessage, .mailmap, .git-blame*",
     "readme*": "authors, backers.md, changelog*, citation*, code_of_conduct.md, codeowners, contributing.md, contributors, copying, credits, governance.md, history.md, license*, maintainers, readme*, security.md, sponsors.md",
   },
   "files.associations": {},
+  "files.watcherExclude": {
+    "coverage": true,
+    "build": true,
+    "dist": true
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features",
+    "editor.tabSize": 2
+  },
+  "prettier.prettierPath": "./node_modules/prettier/index.cjs",
   "highlight.regexes": {
     "(\"@\\s*.+\":\\s{0,1}{},)": {
       "filterFileRegex": ".*\\.arb",
@@ -28,5 +37,10 @@
         }
       ]
     }
-  }
+  },
+  "search.exclude": {
+    "coverage": true,
+    "build": true,
+    "dist": true
+  },
 }

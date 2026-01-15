@@ -1,62 +1,96 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="ru" class="no-js">
-	<head>
-		<title>Google Shop</title>
-		<link
-			rel="stylesheet"
-			crossorigin="anonymous"
-			href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-			integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T">
-		<link
-			rel="stylesheet"
-			href="dist/css/app.css">
-	</head>
-	<body>
-		<!-- Google Shop example -->
-		<div class="wrapper mt-5">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-12">
-						<h1 class="text-center mb-5">Goggle Shop</h1>
-					</div>
-				</div>
-				<div id="shop-field" class="row"></div>
-			</div>
 
-			<!-- Handlebars example -->
-			<div id="handlebars-content"></div>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
+
+	<title>Template JS (NPM Scripts)</title>
+
+	<meta name="keywords" content="Template JS (NPM Scripts)">
+	<meta name="description" content="Template JS (NPM Scripts)">
+
+	<meta name="theme-color" content="#007aff">
+	<meta name="msapplication-navbutton-color" content="#007aff">
+	<meta name="apple-mobile-web-app-status-bar-style" content="#007aff">
+
+	<!-- Favicon's -->
+	<!-- <link rel="shortcut icon" type="image/png" href="img/general/favicon/favicon-32x32.png" sizes="32x32">
+		<link rel="shortcut icon" type="image/png" href="img/general/favicon/favicon-96x96.png" sizes="96x96">
+		<link rel="shortcut icon" type="image/x-icon" href="img/general/favicon/favicon.ico" sizes="16x16">
+		<link rel="apple-touch-icon" sizes="57x57" href="img/general/favicon/apple-touch-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="img/general/favicon/apple-touch-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="img/general/favicon/apple-touch-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="img/general/favicon/apple-touch-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="img/general/favicon/apple-touch-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="img/general/favicon/apple-touch-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="img/general/favicon/apple-touch-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="img/general/favicon/apple-touch-icon-152x152.png"> -->
+
+	<!-- Open Graph data -->
+	<!-- <meta property="og:title" content="{{ og_title }}">
+		<meta property="og:type" content="article">
+		<meta property="og:url" content="{{ og_url }}">
+		<meta property="og:image" content="{{ og_image }}">
+		<meta property="og:description" content="{{ og_description }}">
+		<meta property="og:site_name" content="{{ og_sitename }}">
+		<meta property="fb:admins" content="{{ fb_admins }}"> -->
+
+	<!-- <link rel="stylesheet" crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"> -->
+
+	<link rel="stylesheet" href="dist/css/app.css">
+</head>
+
+<body itemscope="itemscope" itemtype="http://schema.org/WebPage">
+	<!-- Header START -->
+	<header>
+		<div class="l-header">
+			<h1>Template JS (NPM Scripts)</h1>
 		</div>
+	</header>
+	<!-- Header END -->
 
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.0/handlebars.js"></script>
-		<!-- Handlebars example -->
-		<script id="pet-item" type="text/x-handlebars-template">
-			<div class="container">
-				<div class="row pet-item">
-					{{#each pets}}
-					<div class="pet col-xl-3 col-lg-4 col-sm-6 pet-item__inner">
-						<div class="pet-item_photo">
-							<img src="{{photo}}" alt="pet photo">
-						</div>
-						<div class="pet-item_info">
-							<h5 class="pt-10 pet-item__title">{{name}} <span class="species pet-item__title-inner">{{species}}</span></h5>
+	<!-- Content START -->
+	<div id="catalog" class="container product-wrapper"></div>
+	<!-- Content END -->
 
-							<p class="pet-item__age">Age: {{calculateAge birthYear}}</p>
+	<!-- Handlebars html -->
+	<div id="handlebars-content" class=" container wrapper-catalogmt-5"></div>
 
-							{{#if favFoods}}
-							<h4 class="pet-item__favorite">Favorite foods</h4>
-							<ul class="pet-item__favorite--list">
-								{{#each favFoods}}
-								<li>{{{this}}}</li>
-								{{/each}}
-							</ul>
-							{{/if}}
-						</div>
+	<!-- Handlebars script -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.0/handlebars.js"></script>
+	<script id="pet-item" type="text/x-handlebars-template">
+		<div class="container">
+			<div class="row pet-item">
+				{{#each pets}}
+				<div class="pet col-xl-3 col-lg-4 col-sm-6 pet-item__inner">
+					<div class="pet-item_photo">
+						<img src="{{photo}}" alt="pet photo">
 					</div>
-					{{/each}}
-				</div>
-			</div>
-		</script>
+					<div class="pet-item_info">
+						<h5 class="pt-10 pet-item__title">{{name}} <span class="species pet-item__title-inner">{{species}}</span></h5>
 
-		<script type="module" src="dist/js/app.min.js"></script>
-	</body>
+						<p class="pet-item__age">Age: {{calculateAge birthYear}}</p>
+
+						{{#if favFoods}}
+						<h4 class="pet-item__favorite">Favorite foods</h4>
+						<ul class="pet-item__favorite--list">
+							{{#each favFoods}}
+							<li>{{{this}}}</li>
+							{{/each}}
+						</ul>
+						{{/if}}
+					</div>
+				</div>
+				{{/each}}
+			</div>
+		</div>
+	</script>
+
+	<!-- begin scripts -->
+	<script type="module" src="dist/js/app.min.js"></script>
+	<!-- end scripts -->
+</body>
+
 </html>
