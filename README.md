@@ -5,9 +5,7 @@ Modern frontend build template using npm scripts. A lightweight alternative to w
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Node.js Version](https://img.shields.io/badge/node-%3E%3D16.0.0-brightgreen)](https://nodejs.org/)
 
----
-
-## 📋 Table of Contents
+## Table of Contents
 
 - [Features](#-features)
 - [Quick Start](#-quick-start)
@@ -16,23 +14,19 @@ Modern frontend build template using npm scripts. A lightweight alternative to w
 - [Used Packages](#-used-packages)
 - [Development](#-development)
 
----
+## Features
 
-## ✨ Features
+- **SCSS → CSS** - compilation with autoprefixer
+- **ES6+ → ES5** - transpilation via Babel
+- **Minification** - CSS and JavaScript
+- **Image Optimization** - automatic compression
+- **SVG Sprites** - icon consolidation
+- **Live Reload** - automatic browser refresh
+- **Linting** - ESLint for JS, Stylelint for SCSS
+- **Fonts** - automatic copying to dist
+- **Firebase** - ready-to-use deployment commands
 
-- 🎨 **SCSS → CSS** - compilation with autoprefixer
-- 📦 **ES6+ → ES5** - transpilation via Babel
-- 🗜️ **Minification** - CSS and JavaScript
-- 🖼️ **Image Optimization** - automatic compression
-- 🎯 **SVG Sprites** - icon consolidation
-- 🔄 **Live Reload** - automatic browser refresh
-- 🔍 **Linting** - ESLint for JS, Stylelint for SCSS
-- 🎭 **Fonts** - automatic copying to dist
-- 🔥 **Firebase** - ready-to-use deployment commands
-
----
-
-## 🚀 Quick Start
+## Quick Start
 
 ### Installation
 
@@ -54,16 +48,14 @@ After starting:
 - Live server will start on `http://localhost:3000`
 - Files will be automatically rebuilt on changes
 
----
-
-## 📁 Project Structure
+## Project Structure
 
 ```
 npm-scripts-template/
-├── src/                      # Source files
-│   ├── js/                   # JavaScript files
+├── src/                     # Source files
+│   ├── js/                  # JavaScript files
 │   │   └── app.js           # Main JS file
-│   ├── scss/                 # SCSS styles
+│   ├── scss/                # SCSS styles
 │   │   ├── app.scss         # Main stylesheet
 │   │   ├── _variables.scss  # Variables
 │   │   ├── _typography.scss # Typography and fonts
@@ -72,7 +64,7 @@ npm-scripts-template/
 │       ├── fonts/           # Fonts
 │       ├── images/          # Images
 │       └── icons/           # SVG icons
-├── dist/                     # Built files (generated)
+├── dist/                    # Built files (generated)
 │   ├── css/                 # Compiled CSS
 │   ├── js/                  # Transpiled JS
 │   └── assets/              # Optimized assets
@@ -80,9 +72,7 @@ npm-scripts-template/
 └── package.json             # Project configuration
 ```
 
----
-
-## 🛠️ Available Commands
+## Available Commands
 
 ### Main Commands
 
@@ -146,9 +136,7 @@ npm run firebase:init  # Initialize Firebase project
 npm run firebase:serve # Local Firebase functions
 ```
 
----
-
-## 📦 Used Packages
+## Used Packages
 
 ### Build and Compilation
 
@@ -175,9 +163,7 @@ npm run firebase:serve # Local Firebase functions
 - **[npm-run-all](https://github.com/mysticatea/npm-run-all)** - parallel task execution
 - **[onchange](https://github.com/Qard/onchange)** - file change watcher
 
----
-
-## 💻 Development
+## Development
 
 ### Adding to Existing Project
 
@@ -190,18 +176,16 @@ npm run firebase:serve # Local Firebase functions
 
 All configuration files are located in the project root:
 
+- `.babelrc` - Babel settings
 - `.prettierrc` - Prettier settings
 - `eslint.config.cjs` - ESLint settings
 - `stylelint.config.js` - Stylelint settings
-- `.babelrc` - Babel settings
 
 ### Requirements
 
 - Node.js >= 16.0.0
 - npm >= 7.0.0
 
----
-
-## 📝 License
+## License
 
 MIT © [Anton Ustinoff](https://github.com/ziqq)
