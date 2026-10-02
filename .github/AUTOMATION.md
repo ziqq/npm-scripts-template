@@ -72,6 +72,7 @@ the action. Delivery uses a 10-second per-request timeout and at most five
 attempts for retryable failures. Logs and outputs contain neither credentials,
 target identifiers, nor rendered message bodies.
 
-## Existing CI limitations
+## CI action maintenance
 
-The existing `checkout.yml` uses `actions/checkout@v3`; current actionlint reports its JavaScript runner as obsolete. This integration preserves the existing checkout action and build trigger policy.
+The checkout step uses v6 pinned to an immutable commit instead of the obsolete
+v3 runner. The existing build trigger policy is unchanged.
